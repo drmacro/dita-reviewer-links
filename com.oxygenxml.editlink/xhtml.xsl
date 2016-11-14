@@ -35,10 +35,10 @@
     <div class="edit-link-container" style="display: table-cell; margin-top: 0;">
       <xsl:apply-templates/>
     </div>
-
+    
     <!-- The edit link -->
     <span class="edit-link" style="font-size: 12px; opacity: 0.6; display: table-cell; text-align: right; vertical-align: middle"> 
-      <a target="_blank">
+      <a target="_edit">
         <xsl:attribute name="href">
           <xsl:value-of select="editlink:compute($editlink.remote.ditamap.url, $editlink.local.ditamap.path, @xtrf, $editlink.web.author.url)"/>
         </xsl:attribute>Edit online</a>

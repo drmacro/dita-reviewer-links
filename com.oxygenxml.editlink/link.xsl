@@ -17,14 +17,20 @@
         <xsl:param name="web.author.url" as="xs:string"/>
       
         <!-- Use a default value for the Web Author deployment.-->
-        <xsl:variable name="web.author.url.nonull">
-          <xsl:value-of select="if ($web.author.url != '') then $web.author.url else 'https://www.oxygenxml.com/webapp-demo-aws/'"/>
-        </xsl:variable>
+        <xsl:variable name="web.author.url.nonull.base"
+          select="if ($web.author.url != '') then $web.author.url else 'https://www.oxygenxml.com/webapp-demo-aws/'"
+        />
+      <xsl:variable name="web.author.url.nonull"
+        select="if (ends-with($web.author.url.nonull.base, '/')) 
+                   then $web.author.url.nonull.base
+                   else concat($web.author.url.nonull.base, '/')
+                   "
+      />
 
-        <xsl:variable name="ditamap.url.encoded">
-            <xsl:value-of select="encode-for-uri($remote.ditamap.url)"/>
-        </xsl:variable>
-        
+        <xsl:variable name="ditamap.url.encoded"
+          select="encode-for-uri($remote.ditamap.url)"
+        />
+
         <!-- Compute the URL params for the edit url -->
         <xsl:variable name="file.rel.path">
             <xsl:value-of select="editlink:makeRelative(editlink:toUrl($local.ditamap.path), $local.topic.file.url)"/>
